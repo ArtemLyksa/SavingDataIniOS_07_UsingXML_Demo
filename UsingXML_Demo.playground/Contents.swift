@@ -33,7 +33,7 @@ class GameParser: NSObject {
 extension GameParser: NSXMLParserDelegate {
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         xmlText = ""
-        if elementName == "video_game" {
+        if elementName == "video_games" {
              currentGame = VideoGame()
         }
     }
@@ -67,10 +67,11 @@ extension GameParser: NSXMLParserDelegate {
 }
 
 do {
-    if let xmlUrl = NSBundle.mainBundle().URLForResource("video_game", withExtension: "xml") {
+    if let xmlUrl = NSBundle.mainBundle().URLForResource("video_games", withExtension: "xml") {
       let xml = try String(contentsOfURL: xmlUrl)
         let gameParser = GameParser(withXML: xml)
         let games = gameParser.parse()
+        
         for game in games {
 
             print (game)
